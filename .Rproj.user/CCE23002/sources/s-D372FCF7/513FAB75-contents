@@ -1,0 +1,40 @@
+setwd('C:/Users/My Chick/Documents/mushrooms')
+
+mushrooms <- read.csv("mushrooms.csv")
+
+mushrooms <- subset(mushrooms, select = -veil.type)
+mushroomsHasNoMissingValue <- any(is.na(mushrooms))
+
+mushrooms.toNominal <- mushrooms
+mushrooms.toNominalHasNoMissingValue <- any(is.na(mushrooms.toNominal))
+
+numberOfColumns <- ncol(mushrooms.toNominal)
+
+for(i in 1:numberOfColumns){
+  columnName <- colnames(mushrooms.toNominal)[i]
+  mushrooms.toNominal[[columnName]] <- as.numeric(as.factor(mushrooms.toNominal[[columnName]]))
+}
+
+normalize <- function(x) {
+  return ((x - min(x)) / (max(x) - min(x)))
+}
+
+mushrooms.normalized <- as.data.frame(lapply(mushrooms.toNominal, normalize))
+mushrooms.normalizedHasNoMissingValue <- any(is.any(mushrooms.normalized))
+
+mushrooms.train <- mushrooms.normalized[1:8000, -1]
+mushrooms.trainHasNoMissingValue <- any(is.na(mushrooms.train))
+
+mushrooms.test <- mushrooms.normalized[8001:8124, -1]
+mushrooms.testHasNoMissingValue <- any(is.na(mushrooms.test))
+
+mushrooms.train_label <- mushrooms.normalized[1:8000, 1]
+mushrooms.test_label <- mushrooms.normalized[8001:8124, 1]
+
+library(class)
+
+mushrooms.test_pred <- knn(mushrooms.train, mushrooms.test, mushrooms.train_label, k=1000)
+
+library("gmodels")
+
+CrossTable(x= mushrooms.test_label, y=mushrooms.test_pred, chisq=FALSE)

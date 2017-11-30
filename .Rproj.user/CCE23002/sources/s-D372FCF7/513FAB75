@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1510908198420.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "513FAB75",
+    "lastKnownWriteTime" : 1510914021,
+    "last_content_update" : 1510914051914,
+    "path" : "~/mushrooms/mushrooms script.R",
+    "project_path" : "mushrooms script.R",
+    "properties" : {
+        "cursorPosition" : "35,89",
+        "docOutlineVisible" : "0",
+        "scrollLine" : "17",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
